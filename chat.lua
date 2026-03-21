@@ -21,8 +21,13 @@ function ChatManager:send_message(channel_id, sender, message)
 		matchmaking = SystemInfo:matchmaking() == Idstring("MM_STEAM") and "steam" or "epic"
 	end
 
+	local game_version = nil
+	if attributes.send_version then
+		game_version = SBLT_CUS and SBLT_CUS.game_version and SBLT_CUS:game_version() or Application:version()
+	end
+
 	local lobby_info = {
-		game_version = attributes.send_version and Application:version() or nil,
+		game_version = game_version,
 		version_identifier = attributes.version_identifier or nil,
 		matchmaking = matchmaking,
 		channel_id = attributes.channel_id,
