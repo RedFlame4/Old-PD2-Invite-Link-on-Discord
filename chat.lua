@@ -33,8 +33,8 @@ function ChatManager:send_message(channel_id, sender, message)
 		channel_id = attributes.channel_id,
 		lobby_id = managers.network.matchmake.lobby_handler:id(),
 		lobby_message = message:gsub("^/link", ""):gsub("^/invite", ""):trim(),
-		max_players = BigLobbyGlobals and BigLobbyGlobals.num_player_slots and BigLobbyGlobals:num_player_slots() or tweak_data.max_players or 4,
-		players = {},
+		max_members = BigLobbyGlobals and BigLobbyGlobals.num_player_slots and BigLobbyGlobals:num_player_slots() or tweak_data.max_players or 4,
+		members = {},
 	}
 
 	local heist_data = {}
@@ -87,7 +87,7 @@ function ChatManager:send_message(channel_id, sender, message)
 			end
 		end
 
-		lobby_info.players[peer_id] = player_data
+		lobby_info.members[peer_id] = player_data
 	end
 
 	local content_type = "application/json"
